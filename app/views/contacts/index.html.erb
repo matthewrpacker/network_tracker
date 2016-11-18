@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <h1>Enter Contact</h1>
+    <%= form_for [current_user, @contact] do |f| %>
+    <%= f.text_field :first_name, placeholder: "First Name" %>
+    <%= f.text_field :last_name, placeholder: "Last Name" %>
+    <%= f.text_field :email, placeholder: "Email" %>
+    <%= f.text_field :phone, placeholder: "Phone" %>
+    <%= f.submit "Submit", class: "btn btn-primary btn-sm", method: :post %>
+    <% end %>
+    <h2>My Network</h2>
+  </div>
+  <div class="row">
+    <input id="typed" placeholder="Search Contacts">
+    <table id="contactTable">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Edit Contact</th>
+        </tr>
+      </thead>
+      <tbody id="searchBody">
+        <% @contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.first_name %></td>
+          <td><%= contact.last_name %></td>
+          <td><%= contact.email %></td>
+          <td><%= contact.phone %></td>
+          <td> <%= link_to "Edit Contact", edit_user_contact_path(current_user, contact), class: "btn btn-primary btn-sm" %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

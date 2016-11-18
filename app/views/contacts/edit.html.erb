@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Edit Contact</h2>
+  <div class="row">
+    <%= form_for [current_user, @contact] do |f| %>
+    <%= f.text_field :first_name, placeholder: "First Name" %>
+    <%= f.text_field :last_name, placeholder: "Last Name" %>
+    <%= f.text_field :email, placeholder: "Email" %>
+    <%= f.text_field :phone, placeholder: "Phone" %>
+    <%= f.submit "Submit", class: "btn btn-primary btn-sm", method: :put %>
+    <% end %>
+  </div>
+</div>

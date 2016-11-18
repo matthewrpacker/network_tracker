@@ -1,0 +1,11 @@
+<div class="container center">
+  <h1>Login</h1>
+    <%= form_for(:session, url: login_path) do |f| %>
+    <%= f.text_field :email, placeholder: "Email" %>
+    <br><br>
+    <%= f.password_field :password, placeholder: "Password" %>
+    <br><br>
+    <%= f.submit "Submit", class: "btn btn-primary btn-sm" %>
+    <% end %>
+  </div>
+</body>
