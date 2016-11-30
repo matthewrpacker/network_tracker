@@ -1,38 +1,115 @@
 <div class="container">
-  <div class="row">
+  <div class="row" id="contact-form">
     <h1>Enter Contact</h1>
     <%= form_for [current_user, @contact] do |f| %>
     <%= f.text_field :first_name, placeholder: "First Name" %>
-    <%= f.text_field :last_name, placeholder: "Last Name" %>
+    <%= f.text_field :last_name, placeholder: "Last Name" %><br>
     <%= f.text_field :email, placeholder: "Email" %>
-    <%= f.text_field :phone, placeholder: "Phone" %>
-    <%= f.submit "Submit", class: "btn btn-primary btn-sm", method: :post %>
+    <%= f.text_field :phone, placeholder: "Phone" %><br>
+    <%= f.submit "Submit", class: "btn btn-primary btn-sm contact-submit", method: :post %>
+    <% end %>
+  </div><br>
+  <div class="row">
+    <% @months.each do |month| %>
+    <button class="btn btn-primary btn-sm" id="<%= month.downcase %>">
+      <%= month %>
+    </button>
     <% end %>
     <h2>My Network</h2>
-  </div>
-  <div class="row">
     <input id="typed" placeholder="Search Contacts">
-    <table id="contactTable">
+
+
+    <table id="contactTable" class="jan">
       <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
+        <tr class="table-row">
+          <th>First</th>
+          <th>Last</th>
           <th>Email</th>
           <th>Phone</th>
-          <th>Edit Contact</th>
+          <th>Date</th>
+          <th>Method</th>
+          <th>Meeting</th>
+          <th>Save</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody id="searchBody">
         <% @contacts.each do |contact| %>
-        <tr>
+        <tr class="table-row not-contacted" data-month-id="<%= months[0].id.contacts %>">
           <td><%= contact.first_name %></td>
           <td><%= contact.last_name %></td>
           <td><%= contact.email %></td>
-          <td><%= contact.phone %></td>
-          <td> <%= link_to "Edit Contact", edit_user_contact_path(current_user, contact), class: "btn btn-primary btn-sm" %> </td>
+          <td><%= number_to_phone(contact.phone) %></td>
+          <td>
+            <select id="month-date">
+              <option><%= contact.months[0].date.to_s[8..9] %></option>
+              <% @days.each do |day| %>
+                <option><%= day %></option>
+              <% end %>
+            </select>
+          </td>
+          <td>
+            <select id="month-method">
+              <option><%= contact.months[0].method %></option>
+              <option>N/A</option>
+              <option>Phone</option>
+              <option>Email</option>
+              <option>Person</option>
+            </select>
+          </td>
+          <td>
+            <select id="month-meeting">
+              <option><%= contact.months[0].meeting %></option>
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+            </select>
+          </td>
+          <td><button type="button" name="button" class="btn btn-primary btn-xs save">Save</button></td>
+          <td> <%= link_to "Edit", edit_user_contact_path(current_user, contact), class: "btn btn-primary btn-xs" %> </td>
         </tr>
         <% end %>
       </tbody>
     </table>
+
+    <table id="contactTable" class="feb">
+      <thead>
+        <tr class="table-row">
+          <th>First</th>
+          <th>Last</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th id="date">Date</th>
+          <th>Method</th>
+          <th>Meeting</th>
+          <th>Save</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody id="searchBody">
+        <% @contacts.each do |contact| %>
+
+        <tr class="table-row contacted" data-month-id="<%= contact.months[1].id %>">
+          <td><%= contact.first_name %></td>
+          <td><%= contact.last_name %></td>
+          <td><%= contact.email %></td>
+          <td><%= number_to_phone(contact.phone) %></td>
+          <td id="month-date"><%= select_day(Date.today) %></td>
+          <td id="month-method">
+            <%= select_tag(:method, options_for_select(["N/A", "Phone", "Email", "Person"])) %>
+          </td>
+          <td id="month-meeting">
+            <%= select_tag(:method, options_for_select(["Yes", "No", "N/A"])) %>
+          </td>
+          <td><button type="button" name="button" class="btn btn-primary btn-xs">Save</button></td>
+          <td> <%= link_to "Edit", edit_user_contact_path(current_user, contact), class: "btn btn-primary btn-xs" %> </td>
+        </tr>
+
+
+        <% end %>
+      </tbody>
+    </table>
+
+
   </div>
 </div>
