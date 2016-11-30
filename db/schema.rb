@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead
+\# This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
@@ -10,18 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118213607) do
+ActiveRecord::Schema.define(version: 20161130203447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "contacts", force: :cascade do |t|
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "email"
-    t.string  "phone"
-    t.integer "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
+  end
+
+  create_table "month_contacts", force: :cascade do |t|
+    t.integer "months_id"
+    t.integer "contacts_id"
+    t.index ["contacts_id"], name: "index_month_contacts_on_contacts_id", using: :btree
+    t.index ["months_id"], name: "index_month_contacts_on_months_id", using: :btree
+  end
+
+  create_table "months", force: :cascade do |t|
+    t.string  "method",  default: "N/A"
+    t.string  "date"
+    t.integer "meeting", default: 0
+    t.string  "name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,4 +49,6 @@ ActiveRecord::Schema.define(version: 20161118213607) do
   end
 
   add_foreign_key "contacts", "users"
+  add_foreign_key "month_contacts", "contacts", column: "contacts_id"
+  add_foreign_key "month_contacts", "months", column: "months_id"
 end

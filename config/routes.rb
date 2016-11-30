@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create] do
     resources :contacts, only: [:index, :create, :update, :edit]
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :months, only: [:update]
+    end
+  end
 end

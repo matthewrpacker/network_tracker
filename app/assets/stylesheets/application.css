@@ -13,3 +13,68 @@
  *= require_tree .
  *= require_self
  */
+
+.logout {
+  margin-left: 1400px;
+  margin-top: 12px;
+}
+
+.log-in {
+  margin-top: 150px;
+  margin-left: 210px;
+}
+
+.sign-up {
+  margin-top: 150px;
+  margin-left: 580px;
+}
+
+.welcome {
+  text-align: center;
+  margin-top: -150px;
+}
+
+div {
+  text-align: center;
+}
+
+.contact-submit {
+  margin-top: 10px;
+}
+
+.person {
+  margin-top: 10px;
+}
+
+#contact_email {
+  margin-top: 10px;
+}
+
+#contact-form {
+  margin-top: -50px;
+}
+
+#typed {
+  margin-bottom: 15px;
+}
+
+th, td {
+  padding-left: 50px;
+  text-align: center;
+}
+
+.btn-default {
+  height: 20px;
+}
+
+tr > td {
+  padding-bottom: 10px;
+}
+
+.not-contacted {
+  background: lightblue;
+}
+
+.contacted {
+  background: pink;
+}

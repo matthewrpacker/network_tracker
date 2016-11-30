@@ -2,6 +2,8 @@ class ContactsController < ApplicationController
   def index
     @contacts = current_user.contacts.order(id: :desc)
     @contact = Contact.new
+    @months = Month.list
+    @days = Month.days
   end
 
   def create
@@ -12,8 +14,8 @@ class ContactsController < ApplicationController
       email: contact_params[:email],
       phone: contact_params[:phone]
     )
-    @user = User.find(params[:user_id])
     if @contact.save
+      Month.create_all
       flash[:success] = "Contact Created!!"
       redirect_to user_contacts_path(current_user)
     else
